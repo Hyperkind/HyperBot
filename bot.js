@@ -12,19 +12,19 @@ var bot = new IRC.Client(CONFIG.SERVER, CONFIG.USERNAME,
     username : CONFIG.USERNAME
   });
 
-bot.addListener("join", function (channel, who) {
-  if(who === CONFIG.USERNAME){
-    console.log(who + " recognized as joined.");
+bot.addListener('join', function (channel, who) {
+  if(who == CONFIG.USERNAME){
+    console.log(who + ' recognized as joined.');
   } else {
-    console.log(who + " joined the chat!");
-    var joinMes = "Welcome to the channel, " + who + "!";
+    console.log(who + ' joined the chat!');
+    var joinMes = 'Welcome to the channel, ' + who + '!';
     bot.say(CONFIG.CHANNELS[0], joinMes);
   }
 });
 
-bot.addListener("part", function (channel, who) {
-  console.log(who + " left the chat!");
-  var leaveMes = "Take it easy, " + who + "!";
+bot.addListener('part', function (channel, who) {
+  console.log(who + ' left the chat!');
+  var leaveMes = 'Take it easy, ' + who + '!';
   bot.say(CONFIG.CHANNELS[0], leaveMes);
 });
 
