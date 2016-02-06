@@ -28,4 +28,9 @@ bot.addListener('part', function (channel, who) {
   bot.say(CONFIG.CHANNELS[0], leaveMes);
 });
 
+// listens for messages to the channel and displays in terminal
+bot.addListener('message', function (from, to, message) {
+    console.log(from + ' => ' + to + ': ' + message);
+});
+
 bot.connect();
