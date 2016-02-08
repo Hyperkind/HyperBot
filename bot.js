@@ -46,11 +46,12 @@ bot.addListener('message', function (from, to, message) {
   }
 });
 
+// !quote command pulls from quote.json
 bot.addListener('message', function (from, to, message) {
   if (message === '!quote') {
     var quoteMax = Object.keys(QUOTE.QUOTES).length;
     var quoteSelector = Math.floor((Math.random() * quoteMax) + 1);
-    // console.log(quoteSelector);
+    console.log(quoteSelector);
     bot.say(CONFIG.CHANNELS[0], QUOTE.QUOTES[quoteSelector]);
   }
 });
