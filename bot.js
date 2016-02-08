@@ -1,15 +1,19 @@
-// var express = require('express');
-var CONFIG = require('./config');
 var IRC = require('irc');
 
-// var app = express();
+// Requires in config file
+var CONFIG = require('./config');
+
+// Requires in quote JSON file
+var QUOTE = require('./quote');
+// var pullQuote = JSON.parse(QUOTE);
 
 var bot = new IRC.Client(CONFIG.SERVER, CONFIG.USERNAME,
   {
-    channels : CONFIG.CHANNELS,
-    debug : false,
-    password : CONFIG.PASSWORD,
-    username : CONFIG.USERNAME
+    username :  CONFIG.USERNAME,
+    password :  CONFIG.PASSWORD,
+    port     :  CONFIG.PORT,
+    debug    :  false,
+    channels :  CONFIG.CHANNELS
   });
 
 // Confirms that the bot has connected to the channel
@@ -39,5 +43,14 @@ bot.addListener('message', function (from, to, message) {
   if (message === '!hello') {
     var helloMsg = "Is it me you're looking for?";
     bot.say(CONFIG.CHANNELS[0], helloMsg);
+  }
+});
+
+bot.addListener('message', function (from, to, message) {
+  if (message === '!quote') {
+    var quoteMax = Object.keys(QUOTE.QUOTES).length;
+    var quoteSelector = Math.floor((Math.random() * quoteMax) + 1);
+    // console.log(quoteSelector);
+    bot.say(CONFIG.CHANNELS[0], QUOTE.QUOTES[quoteSelector]);
   }
 });
